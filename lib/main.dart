@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:lunar_calendar/screens/home_screen.dart';
+import 'package:lunar_calendar/screens/main_sell.dart';
 import "theme/app_theme.dart";
 
 Future<void> main() async {
@@ -18,7 +19,7 @@ class LichAmApp extends StatelessWidget {
       title: 'Lịch Âm',
       theme: buildAppTheme(),
       locale: const Locale('vi'),
-      home: const HomeScreen(),
+      home: const MainSell(),
     );
   }
 }

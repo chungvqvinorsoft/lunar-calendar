@@ -1,6 +1,5 @@
 //o ngay
 import 'package:flutter/material.dart';
-import 'package:lunar_calendar/theme/anim.dart';
 import 'package:lunar_calendar/theme/app_theme.dart';
 
 /// Ô ngày trong lịch tháng.
@@ -16,16 +15,17 @@ class DateCell extends StatefulWidget {
   final String? lunarText;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
+  final VoidCallback? onDoubleTap;
 
-  const DateCell({
-    super.key,
-    required this.day,
-    this.isToday = false,
-    this.isSelected = false,
-    this.lunarText,
-    this.onTap,
-    this.onLongPress,
-  });
+  const DateCell(
+      {super.key,
+      required this.day,
+      this.isToday = false,
+      this.isSelected = false,
+      this.lunarText,
+      this.onTap,
+      this.onLongPress,
+      this.onDoubleTap});
 
   @override
   State<DateCell> createState() => _DateCellState();
@@ -72,10 +72,11 @@ class _DateCellState extends State<DateCell>
           onTapDown: _handleTapDown,
           onTapCancel: _handleCancel,
           onTapUp: _handleTapUp,
+          onDoubleTap: widget.onDoubleTap,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 220),
             curve: Curves.easeOutCubic,
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             decoration: BoxDecoration(
               color: bgColor,
               borderRadius: BorderRadius.circular(12),

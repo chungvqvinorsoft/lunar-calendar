@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lunar_calendar/theme/app_theme.dart';
 import 'package:lunar_calendar/widgets/calendar_header.dart';
 import 'package:lunar_calendar/widgets/calendar_month_grid.dart';
+import 'package:lunar_calendar/widgets/day_detail.dart';
 import 'package:lunar_calendar/widgets/home_header.dart';
 import 'package:lunar_calendar/widgets/weekday_row.dart';
 
@@ -16,7 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _selectedTime = DateTime.now();
     _selectedDate = DateTime.now();
@@ -36,16 +37,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-      appBar: AppBar(title: const Text("Lịch Âm", style: TextStyle(fontWeight: FontWeight.w900),)),
+      appBar: AppBar(
+          title: const Text(
+        "Lịch Âm",
+        style: TextStyle(fontWeight: FontWeight.w900),
+      )),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: HomeHeader(
-              dateSelected: _selectedDate
+              child: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
+              color: AppColors.primary,
             ),
-          ),
+            child: HomeHeader(dateSelected: DateTime.now()),
+          )),
           SliverToBoxAdapter(
             child: CalendarHeader(
               selectedMonth: _selectedTime,
@@ -60,13 +67,17 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.fromLTRB(16, 12, 16, 24),
             sliver: SliverToBoxAdapter(
               child: CalendarMonthGrid(
-                  year: _selectedTime.year,
-                  month: _selectedTime.month,
-                  selectDate: _selectedDate,
-                  onSelect: (d) {
-                    // show detail _selectedDate
-                    setState(() => _selectedDate = d);
-                  }),
+                year: _selectedTime.year,
+                month: _selectedTime.month,
+                selectDate: _selectedDate,
+                onShowDetail: (d) {
+                  showDateDetailSheet(context, dateSelected: _selectedDate);
+                  setState(() => _selectedDate = d);
+                },
+                onSelect: (d) {
+                  setState(() => _selectedDate = d);
+                },
+              ),
             ),
           )
         ],

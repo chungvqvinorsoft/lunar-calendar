@@ -6,13 +6,17 @@ class CalendarMonthGrid extends StatelessWidget {
   final int year;
   final int month;
   final ValueChanged<DateTime> onSelect;
+  final ValueChanged<DateTime> onShowDetail;
   final DateTime selectDate;
-  const CalendarMonthGrid(
-      {super.key,
-      required this.year,
-      required this.month,
-      required this.onSelect,
-      required this.selectDate});
+  const CalendarMonthGrid({
+    super.key,
+    required this.year,
+    required this.month,
+    required this.onSelect,
+    required this.selectDate,
+    required this.onShowDetail,
+  });
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -38,6 +42,7 @@ class CalendarMonthGrid extends StatelessWidget {
         isToday: _isSameDay(date, DateTime.now()),
         isSelected: _isSameDay(date, selectDate),
         onTap: () => onSelect(date),
+        onDoubleTap: () => onShowDetail(date),
         lunarText: lunarText,
       ));
     }
