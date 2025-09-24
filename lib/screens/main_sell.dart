@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:lunar_calendar/screens/home_screen.dart";
+import "package:lunar_calendar/screens/setting_screen.dart";
 import "package:lunar_calendar/screens/tuvi_screen.dart";
 import "package:lunar_calendar/widgets/app_bottom_bar.dart";
 
@@ -12,17 +13,27 @@ class MainSell extends StatefulWidget {
 class _MainSell extends State<MainSell> {
   int _index = 0;
   final _pages = const [
-    TuviScreen(),
     HomeScreen(),
-    _Stub(text: 'Cài Đặt'),
+    TuviScreen(),
+    SettingScreen(),
   ];
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: IndexedStack(
-        index: _index,
-        children: _pages,
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 0),
+        transitionBuilder: (child, animation) {
+          final offsetAnimation = Tween<Offset>(
+            begin: const Offset(1, 0),
+            end: Offset.zero,
+          ).animate(animation);
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+        child: _pages[_index],
       ),
       bottomNavigationBar: AppBottomBar(
         currentIndex: _index,

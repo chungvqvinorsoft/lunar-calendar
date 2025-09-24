@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lunar_calendar/widgets/card_note.dart';
 import 'package:lunar_calendar/widgets/tuvi_congiap.dart';
 import 'package:lunar_calendar/widgets/tuvi_header.dart';
 
@@ -16,6 +17,9 @@ class TuviScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: TuviConGiap(),
+          ),
+          SliverToBoxAdapter(
+            child: CardNote(),
           )
         ],
       ),

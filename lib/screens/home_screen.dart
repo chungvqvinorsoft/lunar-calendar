@@ -64,14 +64,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: WeekdayRow(),
           ),
           SliverPadding(
-            padding: EdgeInsets.fromLTRB(16, 12, 16, 24),
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
             sliver: SliverToBoxAdapter(
               child: CalendarMonthGrid(
                 year: _selectedTime.year,
                 month: _selectedTime.month,
                 selectDate: _selectedDate,
                 onShowDetail: (d) {
-                  showDateDetailSheet(context, dateSelected: _selectedDate);
+                  showDateDetailSheet(context, dateSelected: d);
                   setState(() => _selectedDate = d);
                 },
                 onSelect: (d) {
